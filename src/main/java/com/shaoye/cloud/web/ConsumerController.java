@@ -1,9 +1,10 @@
 package com.shaoye.cloud.web;
 
+import com.shaoye.cloud.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * @param
@@ -13,12 +14,11 @@ import org.springframework.web.client.RestTemplate;
  */
 @RestController
 public class ConsumerController {
-
     @Autowired
-    RestTemplate restTemplate;
+    HelloService helloService;
 
     @GetMapping("/ribbon-consumer")
     public String helloConsumer(){
-        return restTemplate.getForEntity("http://hello-server/test/hello",String.class).getBody();
+        return helloService.helloService();
     }
 }
